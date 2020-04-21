@@ -15,9 +15,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 public class InMemoryRatesDaoTest {
 
     @Test
-    public void shouldStoreNullWhenResultDoesNotExist() {
+    public void shouldReturnNullWhenResultDoesNotExist() {
         RatesDao service = new InMemoryRatesDao();
-        Rates result = service.get(Currency.of("EUR"), LocalDate.now());
+        Rates result = service.retrieve(Currency.of("EUR"), LocalDate.now());
 
         assertNull(result);
     }
@@ -33,9 +33,9 @@ public class InMemoryRatesDaoTest {
         service.store(givenCurrency, givenDate, givenRates);
 
         // retrieve data
-        Rates results = service.get(givenCurrency, givenDate);
+        Rates results = service.retrieve(givenCurrency, givenDate);
 
-        // assert results
+        // assert result
         assertEquals(givenRates, results);
     }
 }

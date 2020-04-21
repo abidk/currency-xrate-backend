@@ -20,7 +20,7 @@ public class InMemoryRatesDao implements RatesDao {
     }
 
     @Override
-    public Rates get(Currency base, LocalDate date) {
+    public Rates retrieve(Currency base, LocalDate date) {
         final String key = buildKey(base, date);
         return MEMORY_STORE.get(key);
     }

@@ -28,7 +28,7 @@ public class ExchangeService {
     }
 
     public Rates retrieveRates(Currency base, LocalDate date) {
-        Rates results = ratesDao.get(base, date);
+        Rates results = ratesDao.retrieve(base, date);
         if (results == null) {
             RatesResult historicalData = ratesApi.getHistoricalData(base, date);
             results = convert(historicalData);

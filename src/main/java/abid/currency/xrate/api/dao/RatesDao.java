@@ -9,5 +9,5 @@ public interface RatesDao {
 
     void store(Currency base, LocalDate date, Rates rates);
 
-    Rates get(Currency base, LocalDate date);
+    Rates retrieve(Currency base, LocalDate date);
 }

@@ -46,7 +46,7 @@ public class ExchangeServiceTest {
     }
 
     @Test
-    public void givenExistingRateRequestShouldCallDaoOnly() {
+    public void givenExistingRateRequestShouldNotCallApiOrDaoStore() {
         givenBase("EUR");
         givenDate("2011-01-01");
         givenDaoRequestReturnsRates();
@@ -89,11 +89,11 @@ public class ExchangeServiceTest {
     }
 
     private void givenDaoRequestReturnsNull() {
-        when(ratesDao.get(givenBase, givenDate)).thenReturn(null);
+        when(ratesDao.retrieve(givenBase, givenDate)).thenReturn(null);
     }
 
     private void givenDaoRequestReturnsRates() {
-        when(ratesDao.get(givenBase, givenDate))
+        when(ratesDao.retrieve(givenBase, givenDate))
                 .thenReturn(new Rates(givenBase, List.of(new Rate(Currency.of("USD"), Quote.of("2")))));
     }
 

@@ -29,7 +29,7 @@ public class RatesApiIntegrationTest {
     private Currency givenBase;
 
     @Test()
-    public void whenCallingRatesServiceForUnknownBaseShouldReturnExpectedResults() {
+    public void whenCallingRatesServiceForUnknownCurrencyShouldThrowAnError() {
         givenDefaultApi();
         givenBaseCurrency("ABC");
         givenDate(LocalDate.of(2011, 01, 01));

@@ -40,7 +40,7 @@ public class RatesControllerTest {
     }
 
     @Test
-    public void whenCurrencyIsIncorrectlyFormatted() throws Exception {
+    public void whenCallingEndpointWithIncorrectlyFormattedCurrency() throws Exception {
         mvc.perform(MockMvcRequestBuilders
                 .get("/rates/eur/2011-01-01")
                 .accept(MediaType.APPLICATION_JSON))
@@ -48,7 +48,7 @@ public class RatesControllerTest {
     }
 
     @Test
-    public void whenDateIsIncorrectlyFormatted() throws Exception {
+    public void whenCallingEndpointWithIncorrectlyFormattedDate() throws Exception {
         mvc.perform(MockMvcRequestBuilders
                 .get("/rates/EUR/01-02-2011")
                 .accept(MediaType.APPLICATION_JSON))
@@ -56,7 +56,7 @@ public class RatesControllerTest {
     }
 
     @Test
-    public void whenUrlRequestIssValidShouldReturnResponse() throws Exception {
+    public void whenCallingEndpointShouldReturnExpectedResponse() throws Exception {
         final MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders
                 .get("/rates/EUR/2011-01-01")
                 .accept(MediaType.APPLICATION_JSON))
