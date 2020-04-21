@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    id 'org.springframework.boot' version '2.2.6.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'org.owasp.dependencycheck' version '5.3.2.1' // ./gradlew dependencyCheckAnalyze
+    id 'com.github.ben-manes.versions' version '0.28.0' // ./gradlew dependencyUpdates
+    id "com.adarshr.test-logger" version "2.0.0"
+}
+
+group = 'abid.currency.xrate.api'
+version = '0.0.1-SNAPSHOT'
+
+sourceCompatibility = JavaVersion.VERSION_11
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
+
+wrapper {
+    gradleVersion = '6.3'
+    distributionType = Wrapper.DistributionType.ALL
+}
+
+check.dependsOn += [dependencyCheckAnalyze, dependencyUpdates]
+
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+testlogger {
+    theme 'standard'
+    showPassed false
+    showSkipped true
+    showFailed true
+    showSummary true
+}
+
+dependencyCheck {
+    suppressionFile 'suppressions.xml'
+}
