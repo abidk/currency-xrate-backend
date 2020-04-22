@@ -11,7 +11,7 @@ import java.util.Map;
 @Repository
 public class InMemoryRatesDao implements RatesDao {
 
-    private final Map<String, Rates> MEMORY_STORE = new HashMap<>();
+    private static final Map<String, Rates> MEMORY_STORE = new HashMap<>();
 
     @Override
     public void store(Currency base, LocalDate date, Rates rates) {

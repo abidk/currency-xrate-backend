@@ -26,7 +26,7 @@ public class InMemoryRatesDaoTest {
     public void shouldStoreAndReturnCorrectResult() {
         Currency givenCurrency = Currency.of("EUR");
         LocalDate givenDate = LocalDate.now();
-        Rates givenRates = new Rates(givenCurrency, List.of(new Rate(Currency.of("USD"), Quote.of("1"))));
+        Rates givenRates = buildRates(givenCurrency);
 
         // store data
         RatesDao service = new InMemoryRatesDao();
@@ -37,5 +37,25 @@ public class InMemoryRatesDaoTest {
 
         // assert result
         assertEquals(givenRates, results);
+    }
+
+    @Test
+    public void shouldContainOneMemoryStore() {
+        Currency givenCurrency = Currency.of("EUR");
+        LocalDate givenDate = LocalDate.now();
+        Rates givenRates = buildRates(givenCurrency);
+
+        // store data
+        RatesDao service1 = new InMemoryRatesDao();
+        service1.store(givenCurrency, givenDate, givenRates);
+        assertEquals(givenRates, service1.retrieve(givenCurrency, givenDate));
+
+        // load a different and check the data exists
+        RatesDao service2 = new InMemoryRatesDao();
+        assertEquals(givenRates, service2.retrieve(givenCurrency, givenDate));
+    }
+
+    private Rates buildRates(Currency currency) {
+        return new Rates(currency, List.of(new Rate(Currency.of("USD"), Quote.of("1"))));
     }
 }
